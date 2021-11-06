@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors"); //Cors will allow us do requests from different devices without compromising  our requests
 const routes = require("./routes");
+const path = require("path");
 const app = express();
 
 const PORT = process.env.PORT || 8000;
@@ -21,6 +22,7 @@ try {
   console.log("MongoDB connected successfully");
 } catch (error) {}
 
+app.use("/files", express.static(path.resolve(__dirname, "..", "files")));
 app.use(routes);
 
 app.listen(PORT, () => {
