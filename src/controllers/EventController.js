@@ -24,16 +24,28 @@ module.exports = {
     return res.json(event);
   },
 
-  async getEventById(req, res) {
-    const { eventId } = req.params;
+  async getAllEvents(req, res) {
     try {
-      const event = await Event.findById(eventId);
+      const events = await Event.find({});
 
-      if (event) {
-        return res.json(event);
+      if (events) {
+        return res.json(events);
       }
     } catch (error) {
-      return res.status(400).json({ message: "EventId does not exist!" });
+      return res.status(400).json({ message: "No events at the moment!" });
     }
   },
+  // async getAllEvents(req, res) {
+  //   const {eventType} = req.params;
+  //   try {
+
+  //     if (!sport) {
+
+  //       return res.json(events);
+  //     }
+  //   } catch (error) {
+  //     return res.status(400).json({ message: "No events at the moment!" });
+  //   }
+  // },
+
 };
